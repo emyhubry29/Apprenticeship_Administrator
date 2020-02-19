@@ -18,7 +18,7 @@ initialValues={{ firstname: '', lastname: '', email: '', password: '' }}
         if (!values.password) {
             errors.password = 'Mot de passe requis';
           } else if (
-            !/^.(?=.{8,})(?=.\d)(?=.[a-z])(?=.[A-Z])(^[a-zA-Z0-9@$=!:.#%]+$)/g.test(values.password)
+            !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^?&*_=+-]).{8,50}$/g.test(values.password)
           ) {
             errors.password = 'Mot de passe invalide';
           }
@@ -44,15 +44,16 @@ initialValues={{ firstname: '', lastname: '', email: '', password: '' }}
 <Form onSubmit={handleSubmit}>
   <Form.Group controlId="formBasicFirstName">
     <Form.Label>Nom</Form.Label>
-    <Form.Control type="firstname" name="firstname" placeholder="Nom" onChange={handleChange}
+    <Form.Control type="firstname" minLength="2" maxLength="50" name="firstname" placeholder="Nom" onChange={handleChange}
             onBlur={handleBlur}
             value={values.firstname}/>
             {errors.firstname && touched.firstname && errors.firstname}
+            
   </Form.Group>
 
   <Form.Group controlId="formBasicLastName">
     <Form.Label>Prénom</Form.Label>
-    <Form.Control type="lastname" name="lastname" placeholder="Prénom" onChange={handleChange}
+    <Form.Control type="lastname" minLength="2" maxLength="50" name="lastname" placeholder="Prénom" onChange={handleChange}
             onBlur={handleBlur}
             value={values.lastname}/>
             {errors.lastname && touched.lastname && errors.lastname}
